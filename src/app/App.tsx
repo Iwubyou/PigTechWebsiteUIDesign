@@ -150,15 +150,17 @@ function LoginPage({ onLogin }: { onLogin: () => void }) {
   const [signUpHint, setSignUpHint] = useState(false);
 
   return (
-    <div className="min-h-screen flex flex-col relative bg-muted">
-      {/* Login Navbar */}
-      <nav className="bg-card border-b border-border sticky top-0 z-50 shadow-sm">
+    <div className="min-h-screen flex flex-col bg-background">
+
+      {/* ─── Login Navbar ─────────────────────────────────────────────── */}
+      <nav className="bg-card border-b border-border shadow-sm z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <div className="flex items-center justify-between h-16">
+          <div className="flex items-center h-16">
             <button className="flex items-center gap-2.5 group">
               <div className="w-9 h-9 rounded-xl bg-primary flex items-center justify-center text-xl shadow-sm group-hover:scale-105 transition-transform">
                 🐷
               </div>
+
               <span
                 className="font-bold text-xl text-foreground tracking-tight"
                 style={displayFont}
@@ -170,97 +172,152 @@ function LoginPage({ onLogin }: { onLogin: () => void }) {
         </div>
       </nav>
 
-      {/* Background */}
-      <div className="absolute inset-0 top-16 overflow-hidden">
-        <img
-          src={IMG.hero}
-          alt="Farm background"
-          className="w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 bg-black/65 backdrop-blur-[2px]" />
-      </div>
+      {/* ─── Login Section ────────────────────────────────────────────── */}
+      <main className="relative flex-1 flex items-center justify-center overflow-hidden px-4 py-10 sm:py-14">
 
-      {/* Login Form */}
-      <div className="relative z-10 flex-1 w-full max-w-md mx-auto px-4 py-12 flex items-center justify-center">
-        <div className="bg-card rounded-2xl shadow-2xl p-8 sm:p-10 w-full">
-          <div className="flex flex-col items-center mb-8">
-            <div className="w-16 h-16 rounded-2xl bg-primary flex items-center justify-center text-4xl shadow-lg mb-4">
+        {/* Background Image */}
+        <div className="absolute inset-0">
+          <img
+            src={IMG.hero}
+            alt="Pig farm background"
+            className="w-full h-full object-cover"
+          />
+
+          {/* Dark overlay */}
+          <div className="absolute inset-0 bg-black/65 backdrop-blur-[1.5px]" />
+        </div>
+
+        {/* Login Card */}
+        <div className="relative z-10 w-full max-w-md">
+          <div className="bg-card rounded-2xl shadow-2xl p-7 sm:p-9">
+
+            {/* Logo */}
+            <div className="flex flex-col items-center mb-7">
+              <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-primary flex items-center justify-center text-3xl sm:text-4xl shadow-lg mb-3">
+                🐷
+              </div>
+
+              <h1
+                className="text-3xl font-bold text-foreground"
+                style={displayFont}
+              >
+                PigTech
+              </h1>
+
+              <p className="text-muted-foreground text-sm mt-1">
+                Smart Pig Farming Platform
+              </p>
+            </div>
+
+            {/* Login Heading */}
+            <h2 className="text-xl font-semibold text-foreground mb-5">
+              Log In
+            </h2>
+
+            {/* Inputs */}
+            <div className="space-y-4">
+              <Input
+                label="Email Address"
+                type="email"
+                value={email}
+                onChange={setEmail}
+                placeholder="juan@example.com"
+              />
+
+              <Input
+                label="Password"
+                type="password"
+                value={password}
+                onChange={setPassword}
+                placeholder="••••••••"
+              />
+            </div>
+
+            {/* Login Button */}
+            <Btn
+              variant="primary"
+              size="lg"
+              onClick={onLogin}
+              className="w-full mt-6"
+            >
+              Login
+            </Btn>
+
+            {/* Links */}
+            <div className="mt-5 flex items-center justify-between text-sm">
+              <button
+                onClick={() => setForgot(!forgot)}
+                className="text-primary hover:underline font-medium"
+              >
+                Forgot Password?
+              </button>
+
+              <button
+                onClick={() => setSignUpHint(!signUpHint)}
+                className="text-muted-foreground hover:text-foreground"
+              >
+                <span className="text-primary font-medium">
+                  Sign Up
+                </span>
+              </button>
+            </div>
+
+            {/* Forgot Password Message */}
+            {forgot && (
+              <div className="mt-4 p-3 rounded-xl bg-primary/10 border border-primary/20 text-sm text-primary">
+                A password reset link has been sent to your email address.
+              </div>
+            )}
+
+            {/* Sign Up Message */}
+            {signUpHint && (
+              <div className="mt-3 p-3 rounded-xl bg-secondary border border-border text-sm text-foreground">
+                Create an account at{" "}
+                <strong>pigtech.ph/register</strong> to get started.
+              </div>
+            )}
+          </div>
+        </div>
+      </main>
+
+      {/* ─── Footer ───────────────────────────────────────────────────── */}
+      <footer className="border-t border-border bg-card py-6 px-4 sm:px-6">
+        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+
+          {/* Logo */}
+          <div className="flex items-center gap-2.5">
+            <div className="w-7 h-7 rounded-lg bg-primary flex items-center justify-center text-base">
               🐷
             </div>
 
-            <h1
-              className="text-3xl font-bold text-foreground"
+            <span
+              className="font-bold text-foreground"
               style={displayFont}
             >
               PigTech
-            </h1>
-
-            <p className="text-muted-foreground text-sm mt-1">
-              Smart Pig Farming Platform
-            </p>
+            </span>
           </div>
 
-          <h2 className="text-xl font-semibold text-foreground mb-6">
-            Log In
-          </h2>
+          {/* Copyright */}
+          <p className="text-muted-foreground text-xs sm:text-sm text-center">
+            © 2025 PigTech Philippines. All rights reserved.
+          </p>
 
-          <div className="space-y-4">
-            <Input
-              label="Email Address"
-              type="email"
-              value={email}
-              onChange={setEmail}
-              placeholder="juan@example.com"
-            />
-
-            <Input
-              label="Password"
-              type="password"
-              value={password}
-              onChange={setPassword}
-              placeholder="••••••••"
-            />
+          {/* Social Icons */}
+          <div className="flex items-center gap-3">
+            {[Facebook, Twitter, Instagram].map((Icon, i) => (
+              <button
+                key={i}
+                type="button"
+                className="w-8 h-8 rounded-lg bg-muted flex items-center justify-center text-muted-foreground hover:bg-primary/10 hover:text-primary transition-colors"
+              >
+                <Icon size={15} />
+              </button>
+            ))}
           </div>
 
-          <Btn
-            variant="primary"
-            size="lg"
-            onClick={onLogin}
-            className="w-full mt-6"
-          >
-            Login
-          </Btn>
-
-          <div className="mt-5 flex items-center justify-between text-sm">
-            <button
-              onClick={() => setForgot(!forgot)}
-              className="text-primary hover:underline font-medium"
-            >
-              Forgot Password?
-            </button>
-
-            <button
-              onClick={() => setSignUpHint(!signUpHint)}
-              className="text-muted-foreground hover:text-foreground"
-            >
-              <span className="text-primary font-medium">Sign Up</span>
-            </button>
-          </div>
-
-          {forgot && (
-            <div className="mt-4 p-3 bg-primary/10 rounded-xl text-sm text-primary border border-primary/20">
-              A password reset link has been sent to your email address.
-            </div>
-          )}
-
-          {signUpHint && (
-            <div className="mt-3 p-3 bg-secondary rounded-xl text-sm text-foreground border border-border">
-              Create an account at{" "}
-              <strong>pigtech.ph/register</strong> to get started.
-            </div>
-          )}
         </div>
-      </div>
+      </footer>
     </div>
   );
 }
