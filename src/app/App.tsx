@@ -144,40 +144,105 @@ function Navbar({ page, setPage, onLogout }: { page: Page; setPage: (p: Page) =>
 
 // ─── Login ────────────────────────────────────────────────────────────────────
 function LoginPage({ onLogin }: { onLogin: () => void }) {
-  const [email, setEmail]       = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [forgot, setForgot]     = useState(false);
+  const [forgot, setForgot] = useState(false);
   const [signUpHint, setSignUpHint] = useState(false);
 
   return (
-    <div className="min-h-screen flex items-center justify-center relative bg-muted">
-      <div className="absolute inset-0 overflow-hidden">
-        <img src={IMG.hero} alt="Farm background" className="w-full h-full object-cover" />
+    <div className="min-h-screen flex flex-col relative bg-muted">
+      {/* Login Navbar */}
+      <nav className="bg-card border-b border-border sticky top-0 z-50 shadow-sm">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <div className="flex items-center justify-between h-16">
+            <button className="flex items-center gap-2.5 group">
+              <div className="w-9 h-9 rounded-xl bg-primary flex items-center justify-center text-xl shadow-sm group-hover:scale-105 transition-transform">
+                🐷
+              </div>
+              <span
+                className="font-bold text-xl text-foreground tracking-tight"
+                style={displayFont}
+              >
+                PigTech
+              </span>
+            </button>
+          </div>
+        </div>
+      </nav>
+
+      {/* Background */}
+      <div className="absolute inset-0 top-16 overflow-hidden">
+        <img
+          src={IMG.hero}
+          alt="Farm background"
+          className="w-full h-full object-cover"
+        />
         <div className="absolute inset-0 bg-black/65 backdrop-blur-[2px]" />
       </div>
 
-      <div className="relative z-10 w-full max-w-md mx-auto px-4 py-12">
-        <div className="bg-card rounded-2xl shadow-2xl p-8 sm:p-10">
+      {/* Login Form */}
+      <div className="relative z-10 flex-1 w-full max-w-md mx-auto px-4 py-12 flex items-center justify-center">
+        <div className="bg-card rounded-2xl shadow-2xl p-8 sm:p-10 w-full">
           <div className="flex flex-col items-center mb-8">
-            <div className="w-16 h-16 rounded-2xl bg-primary flex items-center justify-center text-4xl shadow-lg mb-4">🐷</div>
-            <h1 className="text-3xl font-bold text-foreground" style={displayFont}>PigTech</h1>
-            <p className="text-muted-foreground text-sm mt-1">Smart Pig Farming Platform</p>
+            <div className="w-16 h-16 rounded-2xl bg-primary flex items-center justify-center text-4xl shadow-lg mb-4">
+              🐷
+            </div>
+
+            <h1
+              className="text-3xl font-bold text-foreground"
+              style={displayFont}
+            >
+              PigTech
+            </h1>
+
+            <p className="text-muted-foreground text-sm mt-1">
+              Smart Pig Farming Platform
+            </p>
           </div>
 
-          <h2 className="text-xl font-semibold text-foreground mb-6">Log In</h2>
+          <h2 className="text-xl font-semibold text-foreground mb-6">
+            Log In
+          </h2>
 
           <div className="space-y-4">
-            <Input label="Email Address" type="email" value={email} onChange={setEmail} placeholder="juan@example.com" />
-            <Input label="Password" type="password" value={password} onChange={setPassword} placeholder="••••••••" />
+            <Input
+              label="Email Address"
+              type="email"
+              value={email}
+              onChange={setEmail}
+              placeholder="juan@example.com"
+            />
+
+            <Input
+              label="Password"
+              type="password"
+              value={password}
+              onChange={setPassword}
+              placeholder="••••••••"
+            />
           </div>
 
-          <Btn variant="primary" size="lg" onClick={onLogin} className="w-full mt-6">Login</Btn>
+          <Btn
+            variant="primary"
+            size="lg"
+            onClick={onLogin}
+            className="w-full mt-6"
+          >
+            Login
+          </Btn>
 
           <div className="mt-5 flex items-center justify-between text-sm">
-            <button onClick={() => setForgot(!forgot)} className="text-primary hover:underline font-medium">
+            <button
+              onClick={() => setForgot(!forgot)}
+              className="text-primary hover:underline font-medium"
+            >
               Forgot Password?
             </button>
-            <button onClick={() => setSignUpHint(!signUpHint)} className="text-muted-foreground hover:text-foreground">
+
+            <button
+              onClick={() => setSignUpHint(!signUpHint)}
+              className="text-muted-foreground hover:text-foreground"
+            >
               <span className="text-primary font-medium">Sign Up</span>
             </button>
           </div>
@@ -187,9 +252,11 @@ function LoginPage({ onLogin }: { onLogin: () => void }) {
               A password reset link has been sent to your email address.
             </div>
           )}
+
           {signUpHint && (
             <div className="mt-3 p-3 bg-secondary rounded-xl text-sm text-foreground border border-border">
-              Create an account at <strong>pigtech.ph/register</strong> to get started.
+              Create an account at{" "}
+              <strong>pigtech.ph/register</strong> to get started.
             </div>
           )}
         </div>
